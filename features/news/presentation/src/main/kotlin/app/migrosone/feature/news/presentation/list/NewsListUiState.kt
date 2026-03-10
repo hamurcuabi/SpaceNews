@@ -1,7 +1,9 @@
 package app.migrosone.feature.news.presentation.list
 
+import androidx.compose.runtime.Stable
 import app.migrosone.feature.news.domain.model.NewsArticle
 
+@Stable
 sealed interface NewsListUiState {
     val isRefreshing: Boolean
     val articles: List<NewsArticle>

@@ -1,7 +1,9 @@
 package app.migrosone.feature.news.presentation.detail
 
+import androidx.compose.runtime.Stable
 import app.migrosone.feature.news.domain.model.NewsArticle
 
+@Stable
 sealed interface NewsDetailUiState {
 
     data object Loading : NewsDetailUiState
