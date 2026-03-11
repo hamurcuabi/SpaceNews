@@ -14,7 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 
+import app.migrosone.uikit.LocalCustomColorsPalette
+
 fun Modifier.shimmerEffect(): Modifier = composed {
+    val color = LocalCustomColorsPalette.current
     var size by remember {
         mutableStateOf(IntSize.Zero)
     }
@@ -30,9 +33,9 @@ fun Modifier.shimmerEffect(): Modifier = composed {
     background(
         brush = Brush.linearGradient(
             colors = listOf(
-                Color(0xFFB8B5B5),
-                Color(0xFF8F8B8B),
-                Color(0xFFB8B5B5),
+                color.shimmerReflect,
+                color.shimmerMain,
+                color.shimmerReflect,
             ),
             start = Offset(startOffsetX, 0f),
             end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat())

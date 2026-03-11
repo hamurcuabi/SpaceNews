@@ -20,8 +20,7 @@ class RoomModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME_NB)
-            .allowMainThreadQueries()
-            .fallbackToDestructiveMigration(false)
+            .fallbackToDestructiveMigration()
             .build()
 
     @Provides

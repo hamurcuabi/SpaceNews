@@ -45,7 +45,10 @@ class NewsDetailViewModel @Inject constructor(
                         NewsDetailUiState.Success(result.data, isFav)
                     }
 
-                    is ResultState.Error -> NewsDetailUiState.Error(result.message.orEmpty())
+                    is ResultState.Error -> NewsDetailUiState.Error(
+                        result.appException.message.orEmpty()
+                    )
+
                     ResultState.Loading -> NewsDetailUiState.Loading
                 }
             }.collect { state ->

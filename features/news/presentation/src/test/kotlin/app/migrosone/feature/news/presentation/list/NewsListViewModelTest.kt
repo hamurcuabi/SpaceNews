@@ -1,6 +1,7 @@
 package app.migrosone.feature.news.presentation.list
 
 import app.cash.turbine.test
+import app.migrosone.contract.AppException
 import app.migrosone.contract.ResultState
 import app.migrosone.feature.news.domain.model.NewsArticle
 import app.migrosone.feature.news.domain.usecase.GetNewsUseCase
@@ -120,7 +121,8 @@ internal class NewsListViewModelTest {
     fun `when news use case returns error, then state error should be updated`() = runTest {
         // Given
         val errorMessage = "Error message"
-        every { mockGetNewsUseCase.invoke(any()) } returns flowOf(ResultState.Error(errorMessage,-1))
+        val appException= AppException.Unknown(cause = Throwable(errorMessage))
+        every { mockGetNewsUseCase.invoke(any()) } returns flowOf(ResultState.Error(appException))
 
         // When subscribing to uiState
         viewModel.uiState.test {

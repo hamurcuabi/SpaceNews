@@ -12,16 +12,20 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import app.migrosone.feature.news.domain.model.NewsArticle
 import app.migrosone.feature.news.presentation.detail.states.NewsDetailErrorScreen
 import app.migrosone.feature.news.presentation.detail.states.NewsDetailLoadingScreen
 import app.migrosone.feature.news.presentation.detail.states.NewsDetailSuccessScreen
 import app.migrosone.language.LocalStringResourceManager
 import app.migrosone.language.ML
 import app.migrosone.uikit.LocalCustomColorsPalette
+import app.migrosone.uikit.OnLightCustomColorsPalette
 import app.migrosone.uikit.components.scaffold.KtScaffold
 import app.migrosone.uikit.components.text.KtText
 import app.migrosone.uikit.components.toolbar.KtToolbar
@@ -106,6 +110,37 @@ fun NewsDetailScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NewsDetailScreenPreview() {
+    val dummyArticle = NewsArticle(
+        1,
+        "Title",
+        "https://example.com",
+        "https://example.com/img",
+        "Site",
+        "Summary",
+        "2024-01-01",
+        true
+    )
+    val dummyState = NewsDetailUiState.Success(dummyArticle, true)
+    val dummyAction = object : NewsDetailAction {
+        override fun onBackClick() {}
+        override fun onToggleFavorite() {}
+        override fun onShareClick(title: String, url: String) {}
+        override fun onOpenUrl(url: String) {}
+    }
+
+    CompositionLocalProvider(
+        LocalCustomColorsPalette provides OnLightCustomColorsPalette
+    ) {
+        NewsDetailScreen(
+            state = dummyState,
+            newsAction = dummyAction
+        )
     }
 }
 

@@ -31,6 +31,7 @@ pagingCompose = "3.3.6"
 accompanistPermissions = "0.37.3"
 navigation3 = "1.0.0-alpha07"
 chucker = "4.0.0"
+timber = "5.0.1"
 
 # Test
 test_junit_platform_runner = "1.13.4"
@@ -92,6 +93,7 @@ androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runt
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
 chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-noop = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

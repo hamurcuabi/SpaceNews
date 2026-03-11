@@ -60,6 +60,7 @@ dependencies {
     implementation(projects.navigation)
     implementation(projects.network)
     implementation(projects.uikit)
+    implementation(libs.timber)
 
     implementation(projects.features.news.contract)
     implementation(projects.features.news.data)

@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import app.migrosone.contract.ResultState
 import app.migrosone.feature.news.domain.model.NewsArticle
 import app.migrosone.feature.news.domain.usecase.GetNewsUseCase
-import app.migrosone.feature.news.domain.usecase.ToggleFavoriteUseCase
 import app.migrosone.feature.news.presentation.navigation.NewsNavigation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -57,7 +56,7 @@ class NewsListViewModel @Inject constructor(
                 }
 
                 is ResultState.Error -> NewsListUiState.Error(
-                    message = result.message.orEmpty()
+                    message = result.appException.message.orEmpty()
                 )
             }
         }

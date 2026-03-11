@@ -1,6 +1,7 @@
 package app.migrosone.feature.news.presentation.detail
 
 import app.cash.turbine.test
+import app.migrosone.contract.AppException
 import app.migrosone.contract.ResultState
 import app.migrosone.core.presentation.util.IntentUtils
 import app.migrosone.feature.news.contract.NewsDetailArgs
@@ -112,9 +113,9 @@ internal class NewsDetailViewModelTest {
             // Given
             val args = NewsDetailArgs(1)
             val errorMessage = "Failed to fetch"
-
+            val appException= AppException.Unknown(cause = Throwable(errorMessage))
             every { mockIsFavoriteUseCase.invoke(args.id) } returns flowOf(false)
-            every { mockGetNewsDetailUseCase.invoke(args.id) } returns flowOf(ResultState.Error(errorMessage,-1))
+            every { mockGetNewsDetailUseCase.invoke(args.id) } returns flowOf(ResultState.Error(appException))
 
             // When
             viewModel.initialize(args)

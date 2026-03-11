@@ -19,11 +19,14 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.migrosone.feature.news.domain.model.NewsArticle
 import app.migrosone.feature.news.presentation.list.states.NewsListEmptyScreen
 import app.migrosone.feature.news.presentation.list.states.NewsListErrorScreen
 import app.migrosone.feature.news.presentation.list.states.NewsListLoadingScreen
@@ -31,6 +34,7 @@ import app.migrosone.feature.news.presentation.list.states.NewsListSuccessScreen
 import app.migrosone.language.LocalStringResourceManager
 import app.migrosone.language.ML
 import app.migrosone.uikit.LocalCustomColorsPalette
+import app.migrosone.uikit.OnLightCustomColorsPalette
 import app.migrosone.uikit.components.scaffold.KtScaffold
 import app.migrosone.uikit.components.text.KtText
 import app.migrosone.uikit.components.toolbar.KtToolbar
@@ -148,5 +152,49 @@ internal fun NewsListScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NewsListScreenPreview() {
+    val dummyArticles = listOf(
+        NewsArticle(
+            1,
+            "Title 1",
+            "https://example.com/1",
+            "https://example.com/img1",
+            "Site",
+            "Summary 1",
+            "2024-01-01",
+            false
+        ),
+        NewsArticle(
+            2,
+            "Title 2",
+            "https://example.com/2",
+            "https://example.com/img2",
+            "Site",
+            "Summary 2",
+            "2024-01-02",
+            true
+        )
+    )
+    val dummyState = NewsListUiState.Success(false, dummyArticles)
+    val dummyAction = object : NewsListAction {
+        override fun onSearchQueryChanged(query: String) {}
+        override fun onRefresh() {}
+        override fun onArticleClick(article: NewsArticle) {}
+        override fun navigateToFavorites() {}
+    }
+
+    CompositionLocalProvider(
+        LocalCustomColorsPalette provides OnLightCustomColorsPalette
+    ) {
+        NewsListScreen(
+            searchQuery = "",
+            state = dummyState,
+            action = dummyAction
+        )
     }
 }
