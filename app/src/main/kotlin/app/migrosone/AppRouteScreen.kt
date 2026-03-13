@@ -36,47 +36,48 @@ internal fun AppRouteScreen(
     val isSystemDark =
         if (isSystemInDarkTheme()) OnDarkCustomColorsPalette else OnLightCustomColorsPalette
 
-    CompositionLocalProvider(value = LocalCustomColorsPalette provides isSystemDark) {
-        CompositionLocalProvider(value = LocalStringResourceManager provides stringResourceManager) {
-            val color = LocalCustomColorsPalette.current
+    CompositionLocalProvider(
+        LocalCustomColorsPalette provides isSystemDark,
+        LocalStringResourceManager provides stringResourceManager
+    ) {
+        val color = LocalCustomColorsPalette.current
 
-            Column(modifier = Modifier.fillMaxSize()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color.primaryColor)
-                        .height(
-                            height = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-                        )
-                )
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .navigationBarsPadding()
-                        .background(color.backgroundColor)
-                ) {
-                    NavDisplay(
-                        backStack = backStack,
-                        transitionSpec = {
-                            slideInHorizontally(initialOffsetX = { it }) togetherWith
-                                    slideOutHorizontally(targetOffsetX = { -it })
-                        },
-                        popTransitionSpec = {
-                            slideInHorizontally(initialOffsetX = { -it }) togetherWith
-                                    slideOutHorizontally(targetOffsetX = { it })
-                        },
-                        predictivePopTransitionSpec = {
-                            slideInHorizontally(initialOffsetX = { -it }) togetherWith
-                                    slideOutHorizontally(targetOffsetX = { it })
-                        },
-                        entryProvider = entryProvider {
-                            navGraphProviders.values.forEach {
-                                it.registerGraph(this)
-                            }
-                        }
+        Column(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color.primaryColor)
+                    .height(
+                        height = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
                     )
-                }
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .navigationBarsPadding()
+                    .background(color.backgroundColor)
+            ) {
+                NavDisplay(
+                    backStack = backStack,
+                    transitionSpec = {
+                        slideInHorizontally(initialOffsetX = { it }) togetherWith
+                                slideOutHorizontally(targetOffsetX = { -it })
+                    },
+                    popTransitionSpec = {
+                        slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                                slideOutHorizontally(targetOffsetX = { it })
+                    },
+                    predictivePopTransitionSpec = {
+                        slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                                slideOutHorizontally(targetOffsetX = { it })
+                    },
+                    entryProvider = entryProvider {
+                        navGraphProviders.values.forEach {
+                            it.registerGraph(this)
+                        }
+                    }
+                )
             }
         }
     }

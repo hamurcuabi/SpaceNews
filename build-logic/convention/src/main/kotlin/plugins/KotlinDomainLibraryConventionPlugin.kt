@@ -42,20 +42,6 @@ class KotlinDomainLibraryConventionPlugin : Plugin<Project> {
                     jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
                 }
             }
-
-            dependencies {
-                /*
-                addProject(PluginConstants.Projects.CORE_DOMAIN)
-                addProject(PluginConstants.Projects.CORE_ANNOTATIONS)
-                addImplementation(PluginConstants.Libraries.KotlinxCoroutinesCore)
-
-                addImplementation(PluginConstants.Libraries.KoinCore)
-                addImplementation(PluginConstants.Libraries.KoinAnnotations)
-                addKsp(PluginConstants.Libraries.KoinKsp)
-                addKspProject(PluginConstants.Projects.PROCESSOR)
-
-                 */
-            }
         }
     }
 }

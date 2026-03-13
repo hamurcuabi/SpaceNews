@@ -39,14 +39,6 @@ class KotlinContractLibraryConventionPlugin : Plugin<Project> {
                     jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
                 }
             }
-
-            dependencies {
-                /*
-                addProject(PluginConstants.Projects.CORE_CONTRACT)
-                addImplementation(PluginConstants.Libraries.KotlinSerializationJson)
-
-                 */
-            }
         }
     }
 }

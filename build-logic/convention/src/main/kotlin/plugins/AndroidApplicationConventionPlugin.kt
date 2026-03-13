@@ -1,10 +1,13 @@
 package plugins
 
+import AppBuildTypes
 import AppConfig
+import AppDimensions
+import AppProductFlavors
+import VersionCodeUtils
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import convention.PluginConstants
-import extensions.addDebugImplementation
 import extensions.addImplementation
 import extensions.addKsp
 import extensions.addPlatformImplementation
@@ -32,6 +35,40 @@ internal class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 configureAndroidCompose(this)
+
+                buildTypes {
+                    getByName(AppBuildTypes.DEBUG.type) {
+                        signingConfig = signingConfigs.getByName(AppBuildTypes.DEBUG.type)
+
+                        isMinifyEnabled = false
+                        isDebuggable = true
+                        isShrinkResources = false
+                    }
+                }
+
+                flavorDimensions += AppDimensions.getDimensions()
+
+
+                productFlavors {
+                    AppProductFlavors.values().forEach { flavor ->
+                        create(flavor.variant) {
+                            dimension = flavor.dimension
+                            applicationIdSuffix = flavor.applicationIdSuffix
+
+                            buildConfigField(
+                                "String",
+                                "BASE_URL",
+                                "\"${flavor.baseUrl}\""
+                            )
+
+                            resValue(
+                                "string",
+                                "app_name",
+                                flavor.appName
+                            )
+                        }
+                    }
+                }
 
                 defaultConfig {
                     applicationId = AppConfig.APPLICATION_ID

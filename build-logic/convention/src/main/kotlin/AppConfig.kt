@@ -1,8 +1,5 @@
 @file:Suppress("MissingPackageDeclaration")
 
-import org.gradle.api.JavaVersion
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 
 object AppConfig {
 

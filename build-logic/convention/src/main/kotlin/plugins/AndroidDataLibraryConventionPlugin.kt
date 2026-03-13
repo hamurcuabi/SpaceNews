@@ -47,22 +47,6 @@ internal class AndroidDataLibraryConventionPlugin : Plugin<Project> {
                 }
 
                 dependencies {
-                    /*
-                    addProject(PluginConstants.Projects.CORE_DI)
-                    addProject(PluginConstants.Projects.CORE_DOMAIN)
-                    addProject(PluginConstants.Projects.NETWORK_DATA)
-                    addProject(PluginConstants.Projects.NETWORK_DOMAIN)
-                    addProject(PluginConstants.Projects.CORE_ANNOTATIONS)
-                    addImplementation(PluginConstants.Libraries.KotlinxCoroutinesCore)
-                    addImplementation(PluginConstants.Libraries.KotlinSerializationJson)
-                    addImplementation(PluginConstants.Libraries.KotlinxCoroutinesCore)
-
-                    addImplementation(PluginConstants.Libraries.KoinCore)
-                    addImplementation(PluginConstants.Libraries.KoinAnnotations)
-                    addKsp(PluginConstants.Libraries.KoinKsp)
-                    addKspProject(PluginConstants.Projects.PROCESSOR)
-
-                     */
                     addProject(PluginConstants.Projects.CONTRACT)
                     addProject(PluginConstants.Projects.DATABASE)
                     addProject(PluginConstants.Projects.NETWORK)
